@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Local WorkBuddy state
+.workbuddy/
+
+# Credentials and environment files
+.env
+.env.*
+*.pem
+*.key
