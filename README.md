@@ -2,7 +2,7 @@
 
 专业飞书会议纪要生成 Skill。它可以把原始会议转写、录音文字稿或飞书文档链接，整理成结构化飞书会议纪要，并自动规划开篇总结画板、主题化正文和可执行待办。
 
-参考文章：https://mp.weixin.qq.com/s/xag_vG6norJzEeviyvoidg
+教程文章：https://mp.weixin.qq.com/s/xag_vG6norJzEeviyvoidg
 
 ## 适用场景
 
