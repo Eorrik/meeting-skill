@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  meeting-minutes-pro 看板模板（1200 宽，N=3 条待办 → 高 830）
+  meeting-skill 看板模板（1200 宽，N=3 条待办 → 高 830）
   用法：复制本文件 → 只替换 <text> 的文字（以及三栏的配色）→ 不要动坐标。
   规则：每条 <text> 都要有 data-max-width，字数按 references/svg-board-spec.md 的预算表控制。
   校验：node scripts/check-board.mjs <本文件>
@@ -15,7 +15,7 @@
 
   <!-- 标题区 -->
   <text x="600" y="64" text-anchor="middle" font-size="30" font-weight="700" fill="#1F2329" data-max-width="1120">智能硬件项目推进会 · 关键决策与下一步</text>
-  <text x="600" y="96" text-anchor="middle" font-size="14" fill="#646A73" data-max-width="1120">2026-11-12（周三）14:00–15:30 ｜ 参会 6 人 ｜ 整理：meeting-minutes-pro</text>
+  <text x="600" y="96" text-anchor="middle" font-size="14" fill="#646A73" data-max-width="1120">2026-11-12（周三）14:00–15:30 ｜ 参会 6 人 ｜ 整理：会议记录人</text>
 
   <!-- 核心结论区 -->
   <rect x="40" y="120" width="1120" height="150" rx="12" fill="#FFFBE6" stroke="#D4B45B" stroke-width="2"/>

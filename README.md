@@ -1,8 +1,10 @@
-# meeting-minutes-pro
+# meeting-skill
 
 把一段**杂乱的会议录音转写稿**，变成两个能直接用的本地文件：一份 Markdown 会议纪要，和一张一页纸的 SVG 看板图。待办事项带负责人和跟踪人，可以增量更新。
 
 全程离线：不连飞书，不调任何 API，不装额外依赖。
+
+仓库：<https://github.com/Eorrik/meeting-skill>（本项目基于 [JerryWoo/meeting-minutes-pro](https://github.com/JerryWoo/meeting-minutes-pro) 重做，已移除全部飞书链路，两者各自独立演进。）
 
 ## 它产出什么
 
@@ -30,7 +32,13 @@ SVG 看板是五区固定布局：标题 → 核心结论（黄底）→ 三栏�
 
 把这个目录放进你的 Agent skills 目录即可（Claude Code：`~/.claude/skills/`；其他宿主按各自的 skills 路径放）。`SKILL.md` 的 frontmatter 已经写好触发条件。
 
-不想装也行：直接对 Agent 说"读 `meeting-minutes-pro/SKILL.md`，按它处理 transcript.txt"，效果一样。
+也可以直接 clone：
+
+```bash
+git clone https://github.com/Eorrik/meeting-skill.git
+```
+
+不想装也行：直接对 Agent 说"读 `meeting-skill/SKILL.md`，按它处理 transcript.txt"，效果一样。
 
 不装 Node 也能用——`scripts/` 下两个脚本都是可选的辅助工具。
 
@@ -70,7 +78,7 @@ node scripts/preview.mjs "2026-11-12_智能硬件项目推进会_纪要.md"
 ## 目录结构
 
 ```
-meeting-minutes-pro/
+meeting-skill/
 ├── SKILL.md                        # 主工作流：定位输入 → 去噪 → 结构化 → 写 md → 画 svg → 自检
 ├── references/
 │   ├── minutes-template.md         # Markdown 骨架 + 逐节写作规则 + 禁止项
@@ -95,6 +103,6 @@ node scripts/check-board.mjs "2026-11-12_智能硬件项目推进会_看板.svg"
 
 ## 和原版的关系
 
-这个 skill 派生自 [JerryWoo/meeting-minutes-pro](https://github.com/JerryWoo/meeting-minutes-pro)，但砍掉了全部飞书链路（`lark-doc` / `lark-whiteboard` / `@larksuite/whiteboard-cli` / `lark-cli`），改为本地文件读写 + 手写 SVG。原版的 lark XML 模板（`<whiteboard type="svg">` 那套）已删除。
+这个 skill 派生自 [JerryWoo/meeting-minutes-pro](https://github.com/JerryWoo/meeting-minutes-pro)，但已改名为 **meeting-skill** 并重做：砍掉了全部飞书链路（`lark-doc` / `lark-whiteboard` / `@larksuite/whiteboard-cli` / `lark-cli`），改为本地文件读写 + 手写 SVG。原版的 lark XML 模板（`<whiteboard type="svg">` 那套）已删除。两个仓库各自独立演进，本项目不跟随原版更新。
 
 MIT。

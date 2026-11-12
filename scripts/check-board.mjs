@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * meeting-minutes-pro · SVG 看板自检
+ * meeting-skill · SVG 看板自检
  *
  * 用法：
  *   node scripts/check-board.mjs <看板文件.svg>
@@ -304,7 +304,7 @@ function report(file, json, meta) {
   if (json) {
     console.log(JSON.stringify({ file, meta, errors, warns, infos, ok: errors.length === 0 }, null, 2));
   } else {
-    console.log('meeting-minutes-pro · SVG 看板自检');
+    console.log('meeting-skill · SVG 看板自检');
     console.log(`文件: ${file}`);
     if (meta && !Number.isNaN(meta.width)) console.log(`画布: ${meta.width} × ${meta.height}`);
     console.log('');

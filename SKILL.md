@@ -1,5 +1,5 @@
 ---
-name: meeting-minutes-pro
+name: meeting-skill
 description: >
   本地离线的专业会议纪要工作流。输入是本机的会议录音转写稿（txt / md / vtt / srt / json，
   或用户直接粘贴的杂乱口语文本），输出落在同一目录下的两个文件：`*.md` 会议纪要 与
@@ -15,7 +15,7 @@ read_when:
   - 用户说"帮我整理这个会议"、"生成会议纪要"、"总结一下这段录音"、"更新一下待办"
 ---
 
-# meeting-minutes-pro — 本地会议纪要 + SVG 看板
+# meeting-skill — 本地会议纪要 + SVG 看板
 
 把口语化、多说话人、带 ASR 噪音的转写稿，压成一份可以发给人的纪要，**只产出本地文件**。
 
