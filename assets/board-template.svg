@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  meeting-minutes-pro 看板模板（1200 宽，N=3 条待办 → 高 830）
+  用法：复制本文件 → 只替换 <text> 的文字（以及三栏的配色）→ 不要动坐标。
+  规则：每条 <text> 都要有 data-max-width，字数按 references/svg-board-spec.md 的预算表控制。
+  校验：node scripts/check-board.mjs <本文件>
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="830" viewBox="0 0 1200 830" role="img"
+     font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif">
+  <title>会议看板：智能硬件项目推进会</title>
+  <desc>一页纸会议看板，含核心结论、三栏要点与待办跟踪条。</desc>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="830" rx="16" fill="#F7F9FC"/>
+
+  <!-- 标题区 -->
+  <text x="600" y="64" text-anchor="middle" font-size="30" font-weight="700" fill="#1F2329" data-max-width="1120">智能硬件项目推进会 · 关键决策与下一步</text>
+  <text x="600" y="96" text-anchor="middle" font-size="14" fill="#646A73" data-max-width="1120">2026-11-12（周三）14:00–15:30 ｜ 参会 6 人 ｜ 整理：meeting-minutes-pro</text>
+
+  <!-- 核心结论区 -->
+  <rect x="40" y="120" width="1120" height="150" rx="12" fill="#FFFBE6" stroke="#D4B45B" stroke-width="2"/>
+  <rect x="64" y="140" width="96" height="28" rx="14" fill="#D4B45B"/>
+  <text x="112" y="159" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="88">核心结论</text>
+  <text x="64" y="200" font-size="15" font-weight="700" fill="#1F2329" data-max-width="1072">一、按 500 台小批量试产，预算封顶 120 万元，11 月 28 日前完成排产</text>
+  <text x="64" y="228" font-size="15" font-weight="700" fill="#1F2329" data-max-width="1072">二、结构件沿用方案 A，方案 B 成本高 18%，本轮不采用</text>
+  <text x="64" y="256" font-size="15" font-weight="700" fill="#1F2329" data-max-width="1072">三、固件 v0.9 蓝牙重连丢包列为上线阻塞项，12 月 5 日前必须闭环</text>
+
+  <!-- 卡片一：关键决策 -->
+  <rect x="40" y="290" width="356" height="260" rx="12" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+  <rect x="40" y="290" width="356" height="44" rx="12" fill="#EAF1FB"/>
+  <rect x="40" y="328" width="356" height="6" fill="#EAF1FB"/>
+  <text x="218" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2329" data-max-width="300">关键决策</text>
+  <circle cx="60" cy="353" r="3" fill="#5178C6"/>
+  <text x="74" y="358" font-size="14" fill="#1F2329" data-max-width="302">试产 500 台，超 120 万需重新报备</text>
+  <circle cx="60" cy="383" r="3" fill="#5178C6"/>
+  <text x="74" y="388" font-size="14" fill="#1F2329" data-max-width="302">外壳定方案 A，供应商选中 A 厂</text>
+  <circle cx="60" cy="413" r="3" fill="#5178C6"/>
+  <text x="74" y="418" font-size="14" fill="#1F2329" data-max-width="302">固件 v0.9 视为阻塞，不降级发布</text>
+  <circle cx="60" cy="443" r="3" fill="#5178C6"/>
+  <text x="74" y="448" font-size="14" fill="#1F2329" data-max-width="302">认证样机按 12 台预算报送</text>
+  <circle cx="60" cy="473" r="3" fill="#5178C6"/>
+  <text x="74" y="478" font-size="14" fill="#1F2329" data-max-width="302">排产窗口锁定 11-28，逾期顺延一周</text>
+
+  <!-- 卡片二：风险与卡点 -->
+  <rect x="422" y="290" width="356" height="260" rx="12" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <rect x="422" y="290" width="356" height="44" rx="12" fill="#EAE2FE"/>
+  <rect x="422" y="328" width="356" height="6" fill="#EAE2FE"/>
+  <text x="600" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2329" data-max-width="300">风险与卡点</text>
+  <circle cx="442" cy="353" r="3" fill="#8569CB"/>
+  <text x="456" y="358" font-size="14" fill="#1F2329" data-max-width="302">蓝牙重连丢包 3/1000，待定位</text>
+  <circle cx="442" cy="383" r="3" fill="#8569CB"/>
+  <text x="456" y="388" font-size="14" fill="#1F2329" data-max-width="302">模具 T2 件 11-20 到厂，晚 3 天</text>
+  <circle cx="442" cy="413" r="3" fill="#8569CB"/>
+  <text x="456" y="418" font-size="14" fill="#1F2329" data-max-width="302">认证样机需 12 台，现有 8 台</text>
+  <circle cx="442" cy="443" r="3" fill="#8569CB"/>
+  <text x="456" y="448" font-size="14" fill="#1F2329" data-max-width="302">排产窗口与模具到厂时间冲突</text>
+  <circle cx="442" cy="473" r="3" fill="#8569CB"/>
+  <text x="456" y="478" font-size="14" fill="#1F2329" data-max-width="302">认证机构排期未定，需 11-18 确认</text>
+
+  <!-- 卡片三：下一步 -->
+  <rect x="804" y="290" width="356" height="260" rx="12" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+  <rect x="804" y="290" width="356" height="44" rx="12" fill="#F0F9E8"/>
+  <rect x="804" y="328" width="356" height="6" fill="#F0F9E8"/>
+  <text x="982" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2329" data-max-width="300">下一步</text>
+  <circle cx="824" cy="353" r="3" fill="#509863"/>
+  <text x="838" y="358" font-size="14" fill="#1F2329" data-max-width="302">11-15 前出首批排产计划表</text>
+  <circle cx="824" cy="383" r="3" fill="#509863"/>
+  <text x="838" y="388" font-size="14" fill="#1F2329" data-max-width="302">11-20 完成模具 T2 首件确认</text>
+  <circle cx="824" cy="413" r="3" fill="#509863"/>
+  <text x="838" y="418" font-size="14" fill="#1F2329" data-max-width="302">11-25 认证样机补齐到 12 台</text>
+  <circle cx="824" cy="443" r="3" fill="#509863"/>
+  <text x="838" y="448" font-size="14" fill="#1F2329" data-max-width="302">12-05 固件丢包闭环并压测</text>
+  <circle cx="824" cy="473" r="3" fill="#509863"/>
+  <text x="838" y="478" font-size="14" fill="#1F2329" data-max-width="302">11-18 确认 A 厂周产能上限</text>
+
+  <!-- 待办跟踪条 -->
+  <rect x="40" y="570" width="1120" height="40" rx="8" fill="#1F2329"/>
+  <rect x="40" y="602" width="1120" height="8" fill="#1F2329"/>
+  <text x="75" y="596" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="62">ID</text>
+  <text x="122" y="596" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="530">待办事项</text>
+  <text x="760" y="596" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="156">负责人</text>
+  <text x="925" y="596" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="126">状态</text>
+  <text x="1080" y="596" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF" data-max-width="136">截止</text>
+
+  <rect x="40" y="610" width="1120" height="40" fill="#FFFFFF"/>
+  <line x1="40" y1="650" x2="1160" y2="650" stroke="#E5E6EB" stroke-width="1"/>
+  <text x="75" y="635" text-anchor="middle" font-size="13" fill="#646A73" data-max-width="62">T1</text>
+  <text x="122" y="635" font-size="13" fill="#1F2329" data-max-width="530">出首批 500 台排产计划表，含工位与物料齐套时间</text>
+  <text x="760" y="635" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="156">王磊</text>
+  <text x="925" y="635" text-anchor="middle" font-size="13" fill="#E8A33D" data-max-width="126">进行中</text>
+  <text x="1080" y="635" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="136">11-15</text>
+
+  <rect x="40" y="650" width="1120" height="40" fill="#F7F9FC"/>
+  <line x1="40" y1="690" x2="1160" y2="690" stroke="#E5E6EB" stroke-width="1"/>
+  <text x="75" y="675" text-anchor="middle" font-size="13" fill="#646A73" data-max-width="62">T2</text>
+  <text x="122" y="675" font-size="13" fill="#1F2329" data-max-width="530">模具 T2 首件确认，出偏差报告并定修模方案</text>
+  <text x="760" y="675" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="156">李婷</text>
+  <text x="925" y="675" text-anchor="middle" font-size="13" fill="#8F959E" data-max-width="126">待启动</text>
+  <text x="1080" y="675" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="136">11-20</text>
+
+  <rect x="40" y="690" width="1120" height="40" fill="#FFFFFF"/>
+  <line x1="40" y1="730" x2="1160" y2="730" stroke="#E5E6EB" stroke-width="1"/>
+  <text x="75" y="715" text-anchor="middle" font-size="13" fill="#646A73" data-max-width="62">T3</text>
+  <text x="122" y="715" font-size="13" fill="#1F2329" data-max-width="530">定位蓝牙重连丢包并完成 72 小时压测报告</text>
+  <text x="760" y="715" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="156">陈昊</text>
+  <text x="925" y="715" text-anchor="middle" font-size="13" fill="#D64545" data-max-width="126">阻塞</text>
+  <text x="1080" y="715" text-anchor="middle" font-size="13" fill="#1F2329" data-max-width="136">12-05</text>
+
+  <!-- 页脚 -->
+  <line x1="40" y1="748" x2="1160" y2="748" stroke="#E5E6EB" stroke-width="1"/>
+  <text x="40" y="774" font-size="12" fill="#646A73" data-max-width="1120">数据来源：transcript.txt（ASR 自动转写，未经人工校对）｜ 生成时间：2026-11-12 16:20</text>
+  <text x="40" y="796" font-size="12" fill="#646A73" data-max-width="1120">全量待办与跟进记录见同目录 2026-11-12_智能硬件项目推进会_纪要.md</text>
+</svg>

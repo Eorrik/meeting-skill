@@ -1,110 +1,100 @@
 # meeting-minutes-pro
 
-专业飞书会议纪要生成 Skill。它可以把原始会议转写、录音文字稿或飞书文档链接，整理成结构化飞书会议纪要，并自动规划开篇总结画板、主题化正文和可执行待办。
+把一段**杂乱的会议录音转写稿**，变成两个能直接用的本地文件：一份 Markdown 会议纪要，和一张一页纸的 SVG 看板图。待办事项带负责人和跟踪人，可以增量更新。
 
-教程文章：https://mp.weixin.qq.com/s/xag_vG6norJzEeviyvoidg
+全程离线：不连飞书，不调任何 API，不装额外依赖。
 
-## 适用场景
+## 它产出什么
 
-- 商务洽谈、客户访谈、项目推进会后的正式纪要整理
-- 技术评审、产品评审、需求澄清会后的结构化总结
-- 飞书妙记、语音转写、聊天记录等口语化内容的专业化改写
-- 需要将会议内容沉淀为飞书文档，并包含总结图、关键决策和行动项
+```
+2026-11-12_智能硬件项目推进会_纪要.md      ← 人读、存档、可更新
+2026-11-12_智能硬件项目推进会_看板.svg     ← 投屏、贴群、导出 PNG
+```
 
-## 核心功能
+Markdown 里包含：
 
-- **原文读取**：支持直接粘贴会议转写文本，也支持读取飞书文档 URL。
-- **主题拆分**：自动识别 3-5 个核心议题，避免流水账式复述。
-- **关键信息保留**：保留数字、金额、比例、时间节点、产品名、公司名等关键事实。
-- **开篇画板**：根据会议类型生成对比图、流程图或关系图风格的飞书画板方案。
-- **正文结构化**：输出标题、元数据、总结、分主题嵌套要点、对比表格或双栏网格。
-- **精准待办**：只提炼有明确责任方、动作和验收标准的行动项。
+1. 一句话结论
+2. 核心结论 3 条（带说话人与时间点，可回溯原文）
+3. 3–5 个分主题纪要（按议题组织，不按时间流水账）
+4. 关键数字表（原值不改，标注口径与来源）
+5. 图表区（方案对比表必填，流程/占比用 Mermaid）
+6. 待办与跟踪表（负责人 + 跟踪人 + 状态 + 按人汇总 + 跟进记录）
+7. 待确认事项
+8. 原文存疑点（疑似 ASR 错字，不擅自改）
 
-## 依赖能力
+SVG 看板是五区固定布局：标题 → 核心结论（黄底）→ 三栏彩色卡（决策/风险/下一步）→ 待办跟踪条 → 页脚来源。双击用浏览器打开就能看；要 PNG 就打印成 PDF 或截图。
 
-这个 Skill 面向 WorkBuddy / Claude Code 类 Agent 环境使用，通常需要以下飞书相关能力：
+![看板模板渲染效果](assets/board-preview.png)
 
-- `lark-doc`：读取或创建飞书文档
-- `lark-whiteboard`：写入飞书画板
-- `lark-cli`：执行飞书文档与画板相关命令
-- `@larksuite/whiteboard-cli`：将 DSL 转换为飞书画板 OpenAPI 数据
+## 怎么装
 
-如果你的环境没有配置飞书连接器或 `lark-cli`，仍然可以参考本 Skill 的结构化纪要方法，但无法直接创建飞书文档和画板。
+把这个目录放进你的 Agent skills 目录即可（Claude Code：`~/.claude/skills/`；其他宿主按各自的 skills 路径放）。`SKILL.md` 的 frontmatter 已经写好触发条件。
 
-## 安装方式
+不想装也行：直接对 Agent 说"读 `meeting-minutes-pro/SKILL.md`，按它处理 transcript.txt"，效果一样。
 
-### 方式一：复制到 WorkBuddy Skills 目录
+不装 Node 也能用——`scripts/` 下两个脚本都是可选的辅助工具。
 
-将仓库克隆到本地后，把目录复制到用户级 skills 目录：
+## 怎么用
+
+给它一个转写稿，然后说要纪要：
+
+```
+帮我把 transcript.txt 整理成会议纪要
+```
+
+```
+这段是产品评审会的录音转写，很乱，你整理一下，画个看板，待办要写清楚谁负责
+```
+
+能吃的输入：`.txt` `.md` `.vtt` `.srt` `.json`（ASR 导出），`.docx` / `.pdf` 走 office skill；也可以直接把文本粘进来。
+
+输出落在**输入文件所在目录**，文件名按 `{日期}_{主题前12字}` 生成。
+
+待办跟踪模式（不重新生成纪要）：
+
+```
+T2 模具首件确认做完了，李婷那边说推迟到 11 月 25 号
+新加一条：让采购问下认证周期，陈昊跟进
+```
+
+## 怎么看效果
+
+没有装 Markdown 编辑器也能看：一条命令渲染成网页，自动用默认浏览器打开。
 
 ```bash
-git clone https://github.com/JerryWoo/meeting-minutes-pro.git
-cp -r meeting-minutes-pro ~/.workbuddy/skills/meeting-minutes-pro
+node scripts/preview.mjs "2026-11-12_智能硬件项目推进会_纪要.md"
 ```
 
-Windows 环境可复制到：
+它会在同目录生成 `…_纪要.preview.html`——正文带表格样式，页面顶部有「在新窗口打开看板 SVG ↗」按钮。加 `--no-open` 只生成不弹窗。零依赖、不起服务器、不联网。
 
-```text
-C:\Users\<你的用户名>\.workbuddy\skills\meeting-minutes-pro
+## 目录结构
+
 ```
-
-然后重启或刷新 WorkBuddy 的 Skill 列表。
-
-### 方式二：手动导入
-
-下载本仓库 ZIP，解压后确保目录结构如下：
-
-```text
 meeting-minutes-pro/
-├── SKILL.md
-├── README.md
-└── references/
-    └── lark-xml-template.md
+├── SKILL.md                        # 主工作流：定位输入 → 去噪 → 结构化 → 写 md → 画 svg → 自检
+├── references/
+│   ├── minutes-template.md         # Markdown 骨架 + 逐节写作规则 + 禁止项
+│   ├── svg-board-spec.md           # 看板坐标系、配色、字符预算、排版禁忌
+│   └── todo-tracking.md            # 待办字段、状态机、按人汇总、增量更新协议
+├── assets/
+│   └── board-template.svg          # 可直接复制的看板模板（已通过自检）
+└── scripts/
+    ├── check-board.mjs             # 离线 SVG 自检：XML 合法性 / 文字溢出 / 越界 / 外链
+    └── preview.mjs                 # md → 自包含 HTML 预览（零依赖）
 ```
 
-再将整个 `meeting-minutes-pro` 文件夹放入你的 skills 目录。
+## 两条容易被忽略的规矩
 
-## 使用示例
+**SVG 的文字不会自动换行。** 超宽会直接压到隔壁卡片上，而且不报错。所以模板里每条 `<text>` 都带 `data-max-width`，写之前按 `references/svg-board-spec.md` 的字数预算表卡一遍：
 
-安装后，可以用类似这些指令触发：
-
-```text
-帮我把这份会议录音整理成飞书纪要：[飞书文档URL]
+```bash
+node scripts/check-board.mjs "2026-11-12_智能硬件项目推进会_看板.svg"
 ```
 
-```text
-根据下面这段会议记录生成专业会议纪要，并创建飞书文档：
-[粘贴会议转写文本]
-```
+**没有责任人就不是待办。** 缺"人 + 动作 + 可验收结果"三要素的，进"待确认事项"，不许硬派活。
 
-```text
-这个会议讨论了很多，帮我总结一下并写成智能纪要。
-```
+## 和原版的关系
 
-## 输出结构
+这个 skill 派生自 [JerryWoo/meeting-minutes-pro](https://github.com/JerryWoo/meeting-minutes-pro)，但砍掉了全部飞书链路（`lark-doc` / `lark-whiteboard` / `@larksuite/whiteboard-cli` / `lark-cli`），改为本地文件读写 + 手写 SVG。原版的 lark XML 模板（`<whiteboard type="svg">` 那套）已删除。
 
-默认生成的纪要包含：
-
-1. 标题：`智能纪要：{会议主题} {日期}`
-2. 元数据：录音时间、参与人员
-3. 总结：包含飞书画板总结图
-4. 背景概述：一句话说明会议核心
-5. 分主题正文：3-5 个主题模块，保留关键数字和决策点
-6. 待办清单：责任人、行动描述、验收标准
-
-## 设计原则
-
-- 不写流水账，只写经过提炼的会议结论和判断。
-- 不丢数字，原文中的金额、比例、时间、数量必须保留。
-- 不制造责任人，没有明确责任方的内容不写成待办。
-- 不堆长段落，使用嵌套列表、表格和画板增强可读性。
-- 不只总结“讨论了什么”，更要总结“决定了什么、下一步做什么”。
-
-## 文件说明
-
-- `SKILL.md`：Skill 主说明文件，定义触发场景、执行流程和质量检查清单。
-- `references/lark-xml-template.md`：飞书文档 XML 模板、正文结构、画板 SVG 规范和禁忌。
-
-## License
-
-MIT License
+MIT。
